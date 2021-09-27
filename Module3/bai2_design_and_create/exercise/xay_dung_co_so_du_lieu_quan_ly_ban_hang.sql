@@ -1,0 +1,32 @@
+DROP DATABASE IF EXISTS `sell_management`;
+CREATE DATABASE `sell_management`;
+USE `sell_management`;
+
+CREATE TABLE customer(
+IdC INT PRIMARY KEY,
+NameC VARCHAR(50),
+AgeC INT 
+);
+
+CREATE TABLE orders(
+IdO INT  PRIMARY KEY,
+IdC INT,
+DateO DATE,
+TotalPriceO FLOAT NOT NULL,
+FOREIGN KEY(IdC) REFERENCES customer(IdC)
+);
+
+CREATE TABLE product(
+IdP INT PRIMARY KEY,
+NameP VARCHAR(50),
+PriceP INT
+);
+
+CREATE TABLE order_detail(
+IdO INT,
+IdP INT,
+PRIMARY KEY(IdO,IdP),
+odQTY INT ,
+FOREIGN KEY (IdO) REFERENCES orders(IdO),
+FOREIGN KEY (IdP) REFERENCES product(IdP)
+);

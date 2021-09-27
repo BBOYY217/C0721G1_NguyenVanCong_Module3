@@ -1,0 +1,61 @@
+DROP DATABASE IF EXISTS commodity_management;
+CREATE DATABASE commodity_management;
+USE commodity_management;
+
+CREATE TABLE bill(
+NumberPX INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ExportDate DATETIME
+);
+
+CREATE TABLE supplies(
+IdVTU INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+NameVTU VARCHAR(50)
+);
+
+CREATE TABLE draft_vote(
+NumberPN INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+DraftDate DATETIME
+);
+
+CREATE TABLE supplier(
+IdNCC INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+NameCC VARCHAR(50),
+address VARCHAR(50),
+PhoneNumber VARCHAR(50)
+);
+
+CREATE TABLE import_order(
+NumberDH INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+OrderDate DATETIME,
+IdNCC INT ,
+FOREIGN KEY(IdNCC) REFERENCES supplier(IdNCC)
+);
+
+
+CREATE TABLE bill_supplies(
+NumberPX INT NOT NULL,
+IdVTU INT NOT NULL,
+PRIMARY KEY(NumberPX,IdVTU),
+ExportPrice INT ,
+ExportQuantity INT,
+FOREIGN KEY (NumberPX) REFERENCES bill(NumberPX),
+FOREIGN KEY (IdVTU) REFERENCES Supplies(IdVTU)
+);
+
+CREATE TABLE supplies_draft_vote(
+IdVTU INT NOT NULL,
+NumberPN INT NOT NULL,
+PRIMARY KEY(IdVTU,NumberPN),
+ImportPrice INT ,
+NumberImport INT,
+FOREIGN KEY (IdVTU) REFERENCES supplies(IdVTU),
+FOREIGN KEY (NumberPN) REFERENCES draft_vote(NumberPN)
+);
+
+CREATE TABLE draft_vote_supplier(
+IdVTU INT NOT NULL,
+NumberDH INT NOT NULL,
+PRIMARY KEY(IdVTU,NumberDH),
+FOREIGN KEY (IdVTU) REFERENCES supplies(IdVTU),
+FOREIGN KEY (NumberDH) REFERENCES import_order(NumberDH)
+);
