@@ -60,15 +60,13 @@ VALUES (1,1,3),
 SELECT orders.oID ,orders.oDate , orders.oTotalPrice
 FROM orders;
 
-SELECT customer.Namer ,product.pName ,produst.pPrice
+SELECT customer.Namer ,product.pName, product.pPrice
 FROM customer 
 INNER JOIN orders on customer.cID = orders.cID
 INNER JOIN OrderDetail on orders.oID = OrderDetail.oID
 INNER JOIN product on OrderDetail.pID = product.pID;
 
-
-
-
-
-
-
+SELECT customer.cID, customer.Namer
+FROM customer
+LEFT JOIN orders ON customer.cID = orders.cID
+WHERE oID IS NULL;

@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+}
+p{
+   text-indent: 40px;
+    font-size: 20px;
+}
+span{
+    color: deepskyblue;
+}
+sup{
+    color: blue;
+    font-size: small;
+}
